@@ -11,9 +11,12 @@
                 <li class="list-group-item">
                     <a href="{{route('category.create')}}">Create Category</a>
                 </li>
-                <li class="list-group-item">A third item</li>
-                <li class="list-group-item">A fourth item</li>
-                <li class="list-group-item">And a fifth one</li>
+                <li class="list-group-item">
+                    <a href="{{route('posts.index')}}">show posts</a>
+                </li>
+                <li class="list-group-item">
+                    <a href="{{route('posts.create')}}">Create posts</a>
+                </li>
             </ul>
         </div>
         <div class="col-md-10">

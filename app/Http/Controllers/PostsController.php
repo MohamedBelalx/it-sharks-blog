@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -19,7 +20,8 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('dashboard.posts.create', ['categories' => $categories]);
     }
 
     /**
