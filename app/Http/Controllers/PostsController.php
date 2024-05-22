@@ -14,7 +14,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Posts::all();
+        return view('dashboard.posts.index', ['posts' => $posts]);
     }
 
     /**
@@ -39,7 +40,7 @@ class PostsController extends Controller
             'description' => $request->description,
             'category_id' => $request->category,
             'user_id' => Auth::id(),
-            'image' => '/image/posts' . $image_new_name,
+            'image' => '/image/posts/' . $image_new_name,
         ]);
         return redirect()->route('posts.index');
     }
@@ -57,7 +58,9 @@ class PostsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Posts::findOrFail($id);
+        $categories = Category::all();
+        return view('dashboard.posts.edit', ['post' => $post, 'categories' => $categories]);
     }
 
     /**
@@ -73,6 +76,8 @@ class PostsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Posts::findOrFail($id);
+        $post->delete();
+        return redirect()->back();
     }
 }
