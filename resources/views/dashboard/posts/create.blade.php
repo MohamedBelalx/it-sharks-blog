@@ -15,7 +15,7 @@
     </div>
     <div class="mt-3">
         <label for="">Enter category</label>
-        <select class="form-select" aria-label="Default select example">
+        <select name="category" class="form-select" aria-label="Default select example">
             <option selected disabled>Open this select menu</option>
             @foreach($categories as $category)
             <option value="{{$category->id}}">{{$category->title}}</option>
