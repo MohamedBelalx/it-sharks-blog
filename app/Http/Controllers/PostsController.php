@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
 {
@@ -14,7 +15,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Posts::all();
+        $posts = DB::table('posts')->join('category', 'posts.category_id', '=', 'category.id')
+            ->select('posts.*', 'category.title as category')->get();
         return view('dashboard.posts.index', ['posts' => $posts]);
     }
 
@@ -68,7 +70,28 @@ class PostsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $post = Posts::findOrFail($id);
+        if ($request->image) {
+
+            $image = $request->image;
+            $image_new_name = time() . $image->getClientOriginalName();
+            $image->move('image/posts', $image_new_name);
+            $post->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'category_id' => $request->category,
+                'user_id' => Auth::id(),
+                'image' => '/image/posts/' . $image_new_name,
+            ]);
+        } else {
+            $post->update([
+                'title' => $request->title,
+                'description' => $request->description,
+                'category_id' => $request->category,
+                'user_id' => Auth::id(),
+            ]);
+        }
+        return redirect()->route('posts.index');
     }
 
     /**
