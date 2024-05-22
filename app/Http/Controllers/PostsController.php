@@ -3,17 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
 
-class CategoryController extends Controller
+class PostsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::all();
-        return view('dashboard.category.index', ['categories' => $categories]);
+        //
     }
 
     /**
@@ -21,7 +19,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.category.create');
+        //
     }
 
     /**
@@ -29,12 +27,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create([
-            'title' => $request->title,
-            'description' => $request->description
-        ]);
-
-        return redirect()->back();
+        //
     }
 
     /**
@@ -50,8 +43,7 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        $category = Category::findOrFail($id);
-        return view('dashboard.category.edit', ['category' => $category]);
+        //
     }
 
     /**
@@ -59,13 +51,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $category = Category::findOrFail($id);
-        $category->update([
-            'title' => $request->title,
-            'description' => $request->description
-        ]);
-
-        return redirect()->route('category.index');
+        //
     }
 
     /**
@@ -73,8 +59,6 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
-        return redirect()->back();
+        //
     }
 }
